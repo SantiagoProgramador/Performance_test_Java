@@ -45,6 +45,10 @@ public class ProductController {
         String name = JOptionPane.showInputDialog("Type the name of the product");
         double price = Double.parseDouble(JOptionPane.showInputDialog("Type the price of the product"));
         int stock = Integer.parseInt(JOptionPane.showInputDialog("Type the stock of the product"));
+        if (name == "" || price <= 0 || stock <= 0){
+            JOptionPane.showMessageDialog(null,"Please type valid information");
+            return;
+        }
         Product product = new Product();
         product.setName(name);
         product.setPrice(price);

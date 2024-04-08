@@ -20,6 +20,9 @@ public class ClientController {
         String name = JOptionPane.showInputDialog("Type the name of the Client");
         String last_name = JOptionPane.showInputDialog("Type the last name of the client");
         String email = JOptionPane.showInputDialog("Type the email of the client");
+        if (name == ""||last_name == ""||email == ""){
+            JOptionPane.showMessageDialog(null,"Please type valid information");
+        }
 
         Client client = new Client();
         client.setName(name);
@@ -64,7 +67,10 @@ public class ClientController {
         String name = JOptionPane.showInputDialog("Type the name of the Client");
         String last_name = JOptionPane.showInputDialog("Type the last name of the client");
         String email = JOptionPane.showInputDialog("Type the email of the client");
-
+        if (name == ""||last_name == ""||email == ""){
+            JOptionPane.showMessageDialog(null,"Please type valid information");
+            return;
+        }
         client.setName(name);
         client.setLastName(last_name);
         client.setEmail(email);

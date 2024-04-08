@@ -32,7 +32,6 @@ public class PurchaseModel implements CRUD {
             while (resultSet.next()){
              purchase.setId(resultSet.getInt(1));
             }
-            JOptionPane.showMessageDialog(null,"Purchase added successfully! "+ purchase.toString() );
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Error >> " + e);
         }
@@ -45,7 +44,7 @@ public class PurchaseModel implements CRUD {
         Connection connection = ConfigDB.openConnection();
         List<Object> Purchase_list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Purchase JOIN Client ON Client.id_client = Purchase.id_client JOIN Product ON Product.id_product = Purchase.id_purchase JOIN Store ON Store.id_store = Product.id_store";
+            String sql = "SELECT * FROM Purchase  JOIN Client ON Client.id_client = Purchase.id_client  JOIN Product ON Product.id_product = Purchase.id_product  JOIN Store ON Store.id_store = Product.id_store";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             ResultSet resultSet = (ResultSet) preparedStatement.executeQuery();
@@ -100,7 +99,6 @@ public class PurchaseModel implements CRUD {
             while (resultSet.next()){
              purchase.setId(resultSet.getInt(1));
             }
-            JOptionPane.showMessageDialog(null,"Purchase updated successfully! " + purchase.toString()) ;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Error >> " + e);
             return false;
@@ -114,7 +112,7 @@ public class PurchaseModel implements CRUD {
 
         Purchase purchase = (Purchase) object;
         try {
-            String sql = "UPDATE Product SET stock = '" +(purchase.getProduct().getStock()-purchase.getAmount())  + "' WHERE Product.id_product = " + purchase.getId();
+            String sql = "UPDATE Product SET stock = '" +(purchase.getProduct().getStock()-purchase.getAmount())  + "' WHERE Product.id_product = " + purchase.getProduct().getId();
             PreparedStatement preparedStatement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
 
             preparedStatement.execute();
@@ -123,7 +121,7 @@ public class PurchaseModel implements CRUD {
             while (resultSet.next()){
                 purchase.setId(resultSet.getInt(1));
             }
-            JOptionPane.showMessageDialog(null,"Purchase updated successfully! " + purchase.toString()) ;
+            JOptionPane.showMessageDialog(null,"Everything done successfully!" + purchase.toString());
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null,"Error >> " + e);
             return false;
@@ -157,7 +155,7 @@ public class PurchaseModel implements CRUD {
         Connection connection = ConfigDB.openConnection();
         Purchase purchase = null;
         try{
-            String sql = "SELECT * FROM Purchase JOIN Client ON Client.id_client = Purchase.id_client JOIN Product ON Product.id_product = Purchase.id_purchase JOIN Store ON Store.id_store = Product.id_store WHERE Purchase.id_purchase = " + id;
+            String sql = "SELECT * FROM Purchase JOIN Client ON Client.id_client = Purchase.id_client JOIN Product ON Product.id_product = Purchase.id_product JOIN Store ON Store.id_store = Product.id_store WHERE Purchase.id_purchase = " + id;
             PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(sql);
 
             ResultSet resultSet = (ResultSet) preparedStatement.executeQuery();
@@ -200,7 +198,7 @@ public class PurchaseModel implements CRUD {
         Connection connection = ConfigDB.openConnection();
         List<Object> Purchases_list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Purchase JOIN Client ON Client.id_client = Purchase.id_client JOIN Product ON Product.id_product = Purchase.id_purchase JOIN Store ON Store.id_store = Product.id_store WHERE Product.name LIKE '%' '" + name + "' '%'";
+            String sql = "SELECT * FROM Purchase JOIN Client ON Client.id_client = Purchase.id_client JOIN Product ON Product.id_product = Purchase.id_product JOIN Store ON Store.id_store = Product.id_store WHERE Product.name LIKE '%' '" + name + "' '%'";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             ResultSet resultSet = (ResultSet) preparedStatement.executeQuery();
